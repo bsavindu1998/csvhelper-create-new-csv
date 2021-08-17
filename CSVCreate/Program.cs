@@ -5,9 +5,9 @@ using CsvHelper;
 
 namespace CSVCreate
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             var csvPath = Path.Combine(Environment.CurrentDirectory, $"Rockets {DateTime.Now.ToFileTime()}.csv");
             using var steamfitter = new StreamWriter(csvPath);

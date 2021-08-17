@@ -1,12 +1,23 @@
 ﻿using System;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using CsvHelper;
 
 namespace Read_CSV
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            Console.WriteLine("Hello World!");
+            using var streamer = new StreamReader(@"D:\Education\99x\CSV\sample.csv");
+            using var csvreader = new CsvReader(streamer,CultureInfo.InvariantCulture);
+            csvreader.Context.RegisterClassMap<PersonsMap>();
+            var records = csvreader.GetRecords<Persons>().ToList();
+            foreach (var n in records)
+            {
+                Console.WriteLine(n.FirstName+" "+n.LastName);
+            }
         }
     }
 }
